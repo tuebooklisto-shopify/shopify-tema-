@@ -1,0 +1,133 @@
+{%- style -%}
+  .ebook-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+    padding: 6rem 2rem;
+    min-height: 600px;
+  }
+
+  .ebook-hero__content {
+    flex: 1;
+    max-width: 500px;
+  }
+
+  .ebook-hero__title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: #1a1a1a;
+  }
+
+  .ebook-hero__subtitle {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    color: #2c2c2c;
+  }
+
+  .ebook-hero__button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: #8b5a7d;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+
+  .ebook-hero__button:hover {
+    background-color: #6e4563;
+  }
+
+  .ebook-hero__image {
+    flex: 1;
+    max-width: 500px;
+  }
+
+  .ebook-hero__image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .ebook-hero {
+      flex-direction: column;
+      gap: 2rem;
+      padding: 3rem 1rem;
+      min-height: auto;
+    }
+
+    .ebook-hero__title {
+      font-size: 2rem;
+    }
+
+    .ebook-hero__subtitle {
+      font-size: 1rem;
+    }
+
+    .ebook-hero__content,
+    .ebook-hero__image {
+      max-width: 100%;
+    }
+  }
+{%- endstyle -%}
+
+<div class="ebook-hero">
+  <div class="ebook-hero__content">
+    <h1 class="ebook-hero__title">{{ section.settings.title }}</h1>
+    <p class="ebook-hero__subtitle">{{ section.settings.subtitle }}</p>
+    <a href="{{ section.settings.button_url }}" class="ebook-hero__button">{{ section.settings.button_text }}</a>
+  </div>
+  <div class="ebook-hero__image">
+    {%- if section.settings.image -%}
+      {{ section.settings.image | image_url: width: 500 | image_tag }}
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Título del Ebook"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Aquí va la descripción corta del ebook"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Texto del botón",
+      "default": "Comprar Ahora"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "URL del botón",
+      "default": "/cart"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero"
+    }
+  ]
+}
+{% endschema %}
