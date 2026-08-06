@@ -85,7 +85,15 @@
   </div>
   <div class="ebook-hero__image">
     {%- if section.settings.image -%}
-      {{ section.settings.image | image_url: width: 500 | image_tag }}
+      {{
+        section.settings.image
+        | image_url: width: 600
+        | image_tag:
+          alt: section.settings.image.alt,
+          width: section.settings.image.width,
+          height: section.settings.image.height,
+          loading: "lazy"
+      }}
     {%- endif -%}
   </div>
 </div>
